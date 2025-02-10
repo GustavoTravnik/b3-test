@@ -1,48 +1,37 @@
 ```markdown
-# PinPagTest
+# B3 Simulador de investimento
 
 ## 🛠️ Tecnologias Utilizadas
 - .NET Core 8.0  
-- PostgreSQL  
-- Entity Framework Core  
 - xUnit  
 - Docker  
-- pgAdmin  
-- EF Migrations  
 - OpenAPI  
-
+- Angular
+- EsLint
 ---
 
 ## 🚀 Como Executar o Projeto
 
 ### **Usando Docker**
-1. Navegue até o diretório `\BankServices`.  
+1. Navegue até o diretório `\src`.  
 2. Execute o comando:
    bash
    docker-compose up
-   Isso irá iniciar a aplicação juntamente com o banco de dados PostgreSQL e a interface pgAdmin para gerenciamento do banco.
+   Isso irá iniciar a aplicação frontend e do server, eles serão servidos em:
+   Server: http://localhost:8080 (para swagger /swagger/index.html)
+   Interface angular: http://localhost:4200/
 
-3. **Migrations:**  
-   As migrations devem ser aplicadas automaticamente ao iniciar o projeto.  
-   - Caso isso não aconteça, você pode criar o banco manualmente executando o script localizado em:
+### **Visual Studio**
+(arquivo da solução: /src/FinantialProjectBE.sln)
+1. Vá até as configurações de Startup Item (ao lado esquerdo bobotão padrão de start), e selecione a configuração "ServerAndFront"
+2. Pode dar start pelo visual studio que ele vai subir o server e o fronend, abrindo a interface no navegador e o server com swagger também
 
-     \Database\CreateDatabaseScript.sql
+### **Outros**
+Com Visual code ou até mesmo o console, é possível iniciar os projetos separados, sendo necessário ter instalado o dotnet e o angular CLI (ng)
 ```
 
-### **Executando Localmente**
-1. Abra o arquivo `.sln` localizado no diretório `\BankServices`.  
-2. Esta solução já inclui:
-   - Projeto principal  
-   - Projeto de testes  
-   - Migrations do EF  
-   - Configuração do Docker Compose  
-
-3. Execute o projeto diretamente pelo Visual Studio ou pela IDE de sua preferência.
-
----
-
 ## 🧪 Executando Testes
-Os testes unitários e de integração estão disponíveis no projeto `BankServiceTests`.
+Os testes unitários e de integração estão disponíveis no projeto `tests`, que já está adicionado a solução principal.
 
 ---
 
@@ -50,30 +39,6 @@ Os testes unitários e de integração estão disponíveis no projeto `BankServi
 Como a API está totalmente documentada no Swagger, não há necessidade de listar todas as URLs aqui. Abaixo estão detalhes importantes sobre seu funcionamento:
 
 ### Campos e Funcionamento
-- **Document:** Refere-se ao CPF. Pode ser enviado com ou sem máscara, sendo corretamente validado pelo sistema.
-
-- **Objeto Account:**  
-  Utilizado para operações com usuários, contendo dois campos:
-  - `Id`: Identificador no banco de dados  
-  - `Document`: CPF  
-  **Observação:** Apenas um desses campos deve ser preenchido para evitar ambiguidades.
-
-- **Tipo de Transação:**  
-  Representado por um Enum:
-  - `0`: Depósito  
-  - `1`: Retirada  
-
-- **Formato de Data:**  
-  Segue o padrão ISO 8601, por exemplo:
-  - `yyyy-MM-dd`  
-  - `yyyy-MM-ddTHH:mm:ss`
-
-- **Campo Identifyer:**  
-  Usado nas URLs das requisições (por exemplo, `/api/ClientAccount/getTransactionList/{identifyer}`).  
-  Esse campo pode receber:
-  - O `Id` do banco  
-  - O número do CPF  
+- **Método getCalculation (GET):** realiza os calculos e validações dos valores enviados para o usuário.
 
 ---
-
-Aproveite o projeto PinPagTest! 🎉
