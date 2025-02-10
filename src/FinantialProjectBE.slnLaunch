@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "ServerAndFront",
+    "Projects": [
+      {
+        "Path": "server\\FinanceServices.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "frontend\\frontend.esproj",
+        "Action": "Start",
+        "DebugTarget": "localhost (Chrome)"
+      }
+    ]
+  }
+]

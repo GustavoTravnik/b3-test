@@ -1,0 +1,41 @@
+<div class="container">
+  <mat-card class="form-card">
+    <h2>Versão 1.0 - Com justos de IR</h2>
+    <form [formGroup]="calcForm" (ngSubmit)="simulateCalculation()">
+      
+      <!-- Investment Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Investimento Inicial</mat-label>
+        <input matInput type="number" formControlName="initialInvestment" placeholder="R$ 0.00">
+        <mat-error *ngIf="calcForm.get('initialInvestment')?.invalid && calcForm.get('initialInvestment')?.touched">
+          Insira um valor válido não negativo.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Months Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Prazo em Meses</mat-label>
+        <input matInput type="number" formControlName="months" placeholder="Ex: 12">
+        <mat-error *ngIf="calcForm.get('months')?.invalid && calcForm.get('months')?.touched">
+          Insira um número válido de meses.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="calcForm.invalid">
+          Fazer Simulação
+        </button>
+      </div>
+    </form>
+
+    <!-- Result Section -->
+    <mat-card *ngIf="simulationResult !== null" class="result-card">
+      <h3>Resultado da Simulação:</h3>
+      <p>Valor Bruto: R$ {{ simulationResult?.bruteAmount | number: '1.2-2' }}</p>
+      <p>Valor Líquido: R$ {{ simulationResult?.liquidAmount | number: '1.2-2' }}</p>
+      <p>Valor dos descontos de tributos: R$ {{ simulationResult?.tributeAmount | number: '1.2-2' }}</p>
+      <p>Porcentual aplicado dos tributos: {{ simulationResult?.tributePercent | number: '1.2-2' }}%</p>
+    </mat-card>
+  </mat-card>
+</div>

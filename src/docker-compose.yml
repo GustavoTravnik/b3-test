@@ -1,0 +1,27 @@
+services:
+    financeservices:
+        container_name: b3-container-backend
+        image: financeservices
+        build:
+          context: server
+          dockerfile: Dockerfile        
+        networks:
+          - b3_dbnet
+        ports:
+          - "8080:8080"
+    angular-app:
+        container_name: b3-container-frontend
+        image: frontend
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+          - "4200:4200"
+        environment:
+          - NODE_ENV=development
+        networks:
+          - b3_dbnet
+
+networks:
+  b3_dbnet:
+    driver: bridge
